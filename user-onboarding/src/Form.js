@@ -20,8 +20,6 @@ export default function Container() {
       .get(UsersApi)
       .then(res => {
         setUsersList(res.data.data);
-        // debugger
-        // console.log(res.data.data);
       })
       .catch(err => {
         debugger;
@@ -41,7 +39,7 @@ export default function Container() {
       .post(UsersApi, friendToPost)
       .then(res => {
         // res.data contains the newly created friend
-        const newLyCreatedFriendFromServer = res.data.data;
+        const newLyCreatedFriendFromServer = res.data;
         setUsersList(usersList.concat(newLyCreatedFriendFromServer));
         actions.resetForm();
       })
@@ -122,7 +120,11 @@ const UserForm = ({ onSubmit }) => {
             <div>
               <label>
                 Terms of Service
-                <Field name="termsOfService" type="checkbox" checked={props.values.termsOfService}/>
+                <Field
+                  name="termsOfService"
+                  type="checkbox"
+                  checked={props.values.termsOfService}
+                />
                 <ErrorMessage name="termsOfService" component="div" />
               </label>
             </div>
